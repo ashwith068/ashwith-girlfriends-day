@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:"Cormorant Garamond",serif;background:#050203;color:#fff;overflow-x:hidden}
+body{background:radial-gradient(circle at 50% 20%,#300810 0,#0b0205 42%,#020102 100%)}
+#hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.heart{position:absolute;bottom:-40px;font-size:18px;opacity:.7;animation:float linear forwards;text-shadow:0 0 18px #ff416d}
+@keyframes float{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+.screen{min-height:100vh;display:none;position:relative;z-index:1;padding:32px 22px;align-items:center;justify-content:center}
+.screen.active{display:flex}.wrap{width:min(1050px,100%);text-align:center}
+.brand{position:fixed;top:25px;left:30px;font-family:"Great Vibes";font-size:28px;color:#fff;z-index:5}.brand span{color:#ff4d72}
+.music{position:fixed;right:25px;top:22px;z-index:5;border:1px solid #76505a;background:#12080c;color:#fff;border-radius:999px;padding:10px 17px;cursor:pointer}
+.eyebrow{font-family:"Great Vibes";font-size:34px;color:#ff9db2;text-shadow:0 0 20px #ff315d}
+.rose{font-size:70px;filter:drop-shadow(0 0 22px #ff315d);margin:5px}
+h1{font-size:clamp(46px,8vw,92px);line-height:.95;margin:10px 0 22px;font-weight:500}
+h1 span{color:#ff587d}.sub{font-size:21px;color:#d7c4c8;margin-bottom:28px}
+.buttons{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+button.cta{font:600 20px "Cormorant Garamond";border-radius:999px;padding:14px 35px;cursor:pointer;transition:.25s}
+.yes{background:linear-gradient(135deg,#ff315d,#b5103c);border:1px solid #ff6d8a;color:#fff;box-shadow:0 0 35px #9d153d80}.no{background:#090608;border:1px solid #8d7379;color:#fff}
+button.cta:hover{transform:translateY(-3px) scale(1.03)}
+.hint{margin-top:22px;color:#a9969a}.card{background:#0c0609cc;border:1px solid #5a252f;border-radius:28px;padding:50px 28px;box-shadow:0 0 70px #8e15352b;backdrop-filter:blur(8px)}
+.big{font-family:"Great Vibes";font-size:clamp(55px,9vw,100px);color:#ff8fa7;text-shadow:0 0 30px #ff315d66}
+.message{font-size:24px;line-height:1.55;color:#eadde0;max-width:750px;margin:18px auto}
+.letter{max-width:850px;margin:auto;background:#f1e5d0;color:#382326;border-radius:8px;padding:45px 40px;text-align:left;box-shadow:0 20px 80px #000;position:relative}
+.letter:before{content:"";position:absolute;inset:12px;border:1px solid #b79578;pointer-events:none}
+.letter h2{font:50px "Great Vibes";color:#9c334b;margin:0 0 18px}.letter p{font-size:20px;line-height:1.7;margin:12px 0}.signature{font:34px "Great Vibes";color:#9c334b;text-align:right;margin-top:25px}
+.footer{position:fixed;bottom:12px;left:0;right:0;text-align:center;color:#9b8187;font-size:14px;z-index:2}
+.smallbtn{margin-top:28px;border:1px solid #70414b;background:#14080c;color:#fff;padding:11px 22px;border-radius:999px;cursor:pointer}
+.shake{animation:shake .35s}.bounce{animation:bounce .5s}
+@keyframes shake{25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-5px)}}
+@keyframes bounce{50%{transform:scale(1.15)}}
+@media(max-width:600px){.brand{left:18px;top:16px;font-size:24px}.music{right:15px;top:15px;padding:8px 12px;font-size:12px}.card{padding:38px 18px}.letter{padding:35px 22px}.letter p{font-size:18px}.eyebrow{font-size:28px}}
+</style>
+</head>
+<body>
+<div id="hearts"></div>
+<div class="brand">For You<span>♡</span></div>
+<button class="music" id="musicBtn">♫ Play Music</button>
+
+<section id="question" class="screen active">
+  <div class="wrap">
+    <div class="eyebrow">Someone has a little surprise for you...</div>
+    <div class="rose">♡</div>
+    <h1>Are you <span>Ashwith's</span><br>girlfriend?</h1>
+    <p class="sub">Choose carefully 😌</p>
+    <div class="buttons">
+      <button class="cta yes" id="yes">♥ YES</button>
+      <button class="cta no" id="no">NO 😅</button>
+    </div>
+    <p class="hint" id="hint"></p>
+  </div>
+</section>
+
+<section id="denied" class="screen">
+  <div class="wrap card">
+    <div class="big">Access Denied</div>
+    <p class="message">This website is exclusively for <b>Ashwith's girlfriend.</b> ❤️<br>Nice try though. 😂</p>
+    <button class="smallbtn" id="tryAgain">← Try Again</button>
+  </div>
+</section>
+
+<section id="welcome" class="screen">
+  <div class="wrap card">
+    <div class="rose">♥</div>
+    <div class="big">Access Granted</div>
+    <p class="message">Welcome, my favorite person. ❤️</p>
+    <button class="cta yes" id="openLetter">Open Your Letter 💌</button>
+  </div>
+</section>
+
+<section id="letter" class="screen">
+  <div class="wrap">
+    <div class="letter">
+      <h2>My Love,</h2>
+      <p>From the moment you came into my life, everything became a little brighter.</p>
+      <p>You're not just my girlfriend — you're my best friend, my peace, my happy place, and my favorite person.</p>
+      <p>Thank you for every laugh, every conversation, every silly moment, and every memory we've created together.</p>
+      <p>I hope you always know how special you are to me. No matter where life takes us, I want to keep choosing you, again and again.</p>
+      <p>Happy Girlfriend's Day, my love. ❤️</p>
+      <div class="signature">Forever yours,<br>Ashwith ❤️</div>
+    </div>
+    <button class="smallbtn" id="restart">Read it again ↻</button>
+  </div>
+</section>
+
+<div class="footer">Made with all my love, just for you. ❤️</div>
+
+<audio id="audio" loop preload="none">
+  <!-- Put your song in this folder and change the filename to: music.mp3 -->
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const screens={question:document.getElementById("question"),denied:document.getElementById("denied"),welcome:document.getElementById("welcome"),letter:document.getElementById("letter")};
+function show(name){Object.values(screens).forEach(s=>s.classList.remove("active"));screens[name].classList.add("active");window.scrollTo({top:0,behavior:"smooth"});}
+const no=document.getElementById("no"), yes=document.getElementById("yes"), hint=document.getElementById("hint");
+let noClicks=0;
+no.onclick=()=>{
+  noClicks++;
+  const hints=["Are you sure? 👀","Think carefully... 🤨","I don't believe you 😂","Girl, stop pretending 😭❤️"];
+  hint.textContent=hints[Math.min(noClicks-1,hints.length-1)];
+  no.classList.add("shake"); setTimeout(()=>no.classList.remove("shake"),400);
+  if(noClicks>=4){no.textContent="YES, obviously ❤️";no.className="cta yes";no.onclick=()=>show("welcome");}
+};
+yes.onclick=()=>{show("welcome");celebrate();};
+document.getElementById("tryAgain").onclick=()=>show("question");
+document.getElementById("openLetter").onclick=()=>{show("letter");celebrate();};
+document.getElementById("restart").onclick=()=>show("question");
+
+function celebrate(){for(let i=0;i<30;i++)setTimeout(makeHeart,i*35)}
+function makeHeart(){
+  const h=document.createElement("div");h.className="heart";h.textContent=["♥","♡","❤","✦"][Math.floor(Math.random()*4)];
+  h.style.left=Math.random()*100+"vw";h.style.fontSize=(12+Math.random()*25)+"px";
+  h.style.animationDuration=(3+Math.random()*4)+"s";document.getElementById("hearts").appendChild(h);
+  setTimeout(()=>h.remove(),7500);
+}
+setInterval(()=>{if(Math.random()<.6)makeHeart()},500);
+
+const audio=document.getElementById("audio"), musicBtn=document.getElementById("musicBtn");
+musicBtn.onclick=async()=>{try{if(audio.paused){await audio.play();musicBtn.textContent="♫ Music On"}else{audio.pause();musicBtn.textContent="♫ Play Music"}}catch(e){alert("Add a file named music.mp3 beside index.html, then press Play Music.");}};
+</script>
+</body>
+</html>
